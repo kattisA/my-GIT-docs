@@ -3,4 +3,12 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra()
+const isProd = process.env.NODE_ENV === 'production'
+const repo = 'my-GIT-docs'
+
+module.exports = withNextra({
+  images: { unoptimized: true },
+  trailingSlash: true,
+  basePath: isProd ? `/${repo}` : undefined,
+  assetPrefix: isProd ? `/${repo}/` : undefined,
+})
